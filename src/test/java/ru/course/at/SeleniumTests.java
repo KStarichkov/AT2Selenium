@@ -7,9 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SeleniumTests {
     private WebDriver driver;
@@ -31,9 +32,21 @@ public class SeleniumTests {
         searchField.sendKeys(input);
         searchField.submit();
 
-        WebElement searchPageField = driver.findElement(By.cssSelector("#sb_form_q"));
-        assertEquals(input, searchPageField.getAttribute("value"));
+        List<WebElement> results = driver.findElements(By.cssSelector("h2 > a[href]"));
 
-        System.out.println("Заголовок страницы: " + driver.getTitle());
+        results.get(results.size() - 1).click();
+        for (WebElement el: results){
+            System.out.println(el.getText());
+        }
+    }
+
+    @Test
+    public void example(){
+        List<String> strings = new ArrayList<>();
+        String a = "First string";
+        String b = "Second string";
+        strings.add(a);
+        strings.add(b);
+
     }
 }
